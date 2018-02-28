@@ -17,13 +17,13 @@ OFLAGS =  -o $(NAME) $(OBJS) $(LIBD)
 
 # libraries
 # mlx
-MLX = $(INCD)minilibx/
+MLX = minilibx/
 MLX_LIB = $(addprefix $(MLX), mlx.a)
 MLX_INC = -I $(MLX)
 MLX_LNK = -L $(MLX) -l mlx -framework OpenGL -framework AppKit
 
 # libft
-FT = $(INCD)libft/
+FT = libft/
 FT_LIB = $(addprefix $(FT), libft.a)
 FT_INC = -I $(FT)
 FT_LNK = -L $(FT) -l ft
@@ -34,8 +34,8 @@ all : objs $(FT_LIB) $(MLX_LIB) $(NAME)
 objs :
 	mkdir -p $(OBJD)
 
-$(OBJD)%.o : $(SRCD)%.c
-	$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+$(OBJS) : $(SRCS)
+	$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -c $(SRCS)
 
 $(FT_LIB) :
 	make -C $(FT)
