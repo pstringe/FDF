@@ -22,7 +22,7 @@ OFLAGS =  -o $(NAME) $(OBJS) $(LIBD)
 MLX = minilibx/
 MLX_LIB = $(addprefix $(MLX), mlx.a)
 MLX_INC = -I $(MLX)
-MLX_LNK = -L $(MLX) -l mlx -framework OpenGL -framework AppKit
+MLX_LNK = -L $(MLX) -lmlx -framework OpenGL -framework AppKit
 
 # libft
 FT = libft/
