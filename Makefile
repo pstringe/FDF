@@ -7,8 +7,10 @@ INCD = ./includes/
 OBJD = ./objs/
 
 # srcs
-SRCS = ./srcs/first.c
-OBJS = $(patsubst %.c, %.o, $(SRCS))
+SRC = first.c
+OBJ = $(patsubst %.c, %.o, $(SRC))
+SRCS = $(addprefix $(SRCD), $(SRC))
+OBJS = $(notdir $(OBJ))
 
 # compilation
 CC = gcc
@@ -29,13 +31,10 @@ FT_INC = -I $(FT)
 FT_LNK = -L $(FT) -l ft
 
 # rules
-all : objs $(FT_LIB) $(MLX_LIB) $(NAME)
-
-objs :
-	mkdir -p $(OBJD)
+all : $(FT_LIB) $(MLX_LIB) $(NAME)
 
 $(OBJS) : $(SRCS)
-	$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -c $(SRCS)
+	$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCD) -c $(SRCS)
 
 $(FT_LIB) :
 	make -C $(FT)
