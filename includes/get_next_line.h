@@ -1,43 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/28 08:39:07 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/28 19:07:42 by pstringe         ###   ########.fr       */
+/*   Created: 2018/02/19 10:15:13 by pstringe          #+#    #+#             */
+/*   Updated: 2018/02/25 06:46:37 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include <stdlib.h>
-# include <math.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 # include "libft.h"
-# include "mlx.h"
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <stdlib.h>
+# define BUFF_SIZE 42
+# define FD_LIMIT 8000
 
-/*
-** points in space
-*/
-
-typedef struct	s_map
-{
-	int				size;
-	struct s_list	*proj;
-	struct s_list	*holo;
-}				t_map;
-
-typedef struct	s_2d
-{
-	int		x;
-	int		y;
-}				t_2d;
-
-typedef struct	s_3d
-{
-	int		x;
-	int		y;
-	int		z;
-}				t_3d;
+int		get_next_line(const int fd, char **line);
 #endif

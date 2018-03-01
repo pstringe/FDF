@@ -7,7 +7,7 @@ INCD = ./includes/
 OBJD = ./objs/
 
 # srcs
-SRC = first.c
+SRC = main.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 SRCS = $(addprefix $(SRCD), $(SRC))
 OBJS = $(notdir $(OBJ))
@@ -28,7 +28,7 @@ MLX_LNK = -L $(MLX) -lmlx -framework OpenGL -framework AppKit
 FT = libft/
 FT_LIB = $(addprefix $(FT), libft.a)
 FT_INC = -I $(FT)
-FT_LNK = -L $(FT) -l ft
+FT_LNK = -L $(FT) -lft
 
 # rules
 all : $(FT_LIB) $(MLX_LIB) $(NAME)
