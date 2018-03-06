@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 08:39:07 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/28 19:07:42 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/01 09:57:26 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@
 /*
 ** points in space
 */
-
-typedef struct	s_map
-{
-	int				size;
-	struct s_list	*proj;
-	struct s_list	*holo;
-}				t_map;
 
 typedef struct	s_2d
 {
