@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 20:40:57 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/05 19:21:53 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/06 15:11:26 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	read_map(int fd, t_list **map)
 	i = 0;
 	j = 0;
 	k = 0;
-	map = NULL;
 	while (get_next_line(fd, &row) > 0)
 	{
 		getvects(&map, row, i, &k);
