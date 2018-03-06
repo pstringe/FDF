@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 08:39:07 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/01 09:57:26 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/06 15:45:13 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,18 @@ typedef struct	s_3d
 	int		y;
 	int		z;
 }				t_3d;
+
+/*
+** read in map vectors
+*/
+
+void	read_map(int fd, t_list **map);
+
+/*
+** utility functions
+*/
+
+void	print_point(t_list *pnt);
+void	print_map_data(t_list *map);
+
 #endif

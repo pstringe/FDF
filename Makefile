@@ -7,7 +7,9 @@ INCD = ./includes/
 OBJD = ./objs/
 
 # srcs
-SRC = main.c
+SRC = main.c\
+	  utils.c\
+	  read.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 SRCS = $(addprefix $(SRCD), $(SRC))
 OBJS = $(notdir $(OBJ))
