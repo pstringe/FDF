@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 08:39:07 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/06 15:45:13 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/08 10:28:28 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <math.h>
 # include "libft.h"
 # include "mlx.h"
+# include <stdio.h>
 
 /*
 ** points in space
@@ -33,6 +34,20 @@ typedef struct	s_3d
 	int		y;
 	int		z;
 }				t_3d;
+
+/*
+**	image
+*/
+
+typedef struct	s_img
+{
+	void	*pntr;
+	char	*data;
+	int		width;
+	int		height;
+	int		l_size;
+	int		pixel;
+}				t_img;
 
 /*
 ** read in map vectors
