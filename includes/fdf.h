@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 08:39:07 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/08 10:28:28 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/08 12:07:30 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct	s_3d
 	int		y;
 	int		z;
 }				t_3d;
-
+	
 /*
 **	image
 */
@@ -53,13 +53,33 @@ typedef struct	s_img
 ** read in map vectors
 */
 
-void	read_map(int fd, t_list **map);
+void			read_map(int fd, t_list **map);
 
 /*
 ** utility functions
 */
 
-void	print_point(t_list *pnt);
-void	print_map_data(t_list *map);
+void			print_point(t_list *pnt);
+void			print_map_data(t_list *map);
 
+/*
+**	functions for dealing with vectors
+*/
+
+t_3d			*getvect(int x, int y, int z);
+t_2d			*getvect2(int x, int y);
+
+/*
+**	projection functions
+*/
+
+t_list			*ortho(t_list *a);
+
+/*
+**	functions for dealing with images
+*/
+
+t_img			*new_img(void *m, int w, int h);
+void			set_pixel(t_img *img, int x, int y, int v);
+void			put_verts(t_img *img, t_list *vects, int v);
 #endif

@@ -6,28 +6,12 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 15:33:05 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/07 18:29:37 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/08 12:04:24 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fdf.h"
-
-/*
-** returns a 3d vector given coordinates
-*/
-
-static t_3d	*getvect(int x, int y, int z)
-{
-	t_3d	*pnt;
-	
-	if(!(pnt = ft_memalloc(sizeof(t_3d))))
-		return (NULL);
-	pnt->x = x;
-	pnt->y = y;
-	pnt->z = z;
-	return (pnt);
-}
 
 /*
 ** gets a row's worth of vectors
