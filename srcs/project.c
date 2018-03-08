@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 11:42:09 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/08 11:46:35 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/08 12:30:27 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ t_list	*ortho(t_list *a)
 	int 	cx;
 	int		cz;
 	
-	sx = 10;
+	sx = 50;
 	sz = 10;
-	cx = 200;
-	cz = 200;
+	cx = 0;
+	cz = 0;
 
 	if ((v= ft_memalloc(sizeof(t_list))))
 	{
