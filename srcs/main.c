@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 20:40:57 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/08 20:53:03 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/09 18:39:06 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	multvect(t_3d *dst, int	mat[4][4], t_3d *src)
 **	multiplies 2 4 by 4 matricies, stores result in a destination matrix
 */
 
-void 	matmult(int	dst[4][4], int mat[4][4], by[4][4])
+void 	matmult(int	dst[4][4], int mat[4][4], int by[4][4])
 {
 	int	i;
 	int j;
@@ -47,9 +47,11 @@ void 	matmult(int	dst[4][4], int mat[4][4], by[4][4])
 			{
 				s += s + mat[i][k] * by[k][j];
 			}
+			dst[i][j] = s;
 		}
 	}
 }
+
 /*
 **	copies a matrix
 */
@@ -71,10 +73,80 @@ void	matcpy(int dst[4][4], int src[4][4])
 }
 
 /*
-**	test function to see if all the other shit works
+**	sets the value of every index within a 4*4 matrix to the integer value, n
 */
 
-void	test(void *m, void *wn, t_list *map, int w, int h)
+void	matset(int mat[4][4], int n)
+{
+	int		i;
+	int		j;
+	
+	i = -1;
+	while (++i < 4)
+	{
+		j = -1;
+		while (++j < 4)
+		{
+			mat[i][j] = n;
+		}
+	}
+}
+
+/*
+**	utility function to print the values within a 4 * 4 matrix
+*/
+
+void	matprnt(int mat[4][4])
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < 4)
+	{
+		j = -1;
+		while (++j < 4)
+		{
+			ft_putchar('[');
+			ft_putnbr(mat[i][j]);
+			ft_putstr("],\t");
+		}
+		ft_putchar('\n');
+	}
+	ft_putchar('\n');
+}
+
+/*
+**	a test function for matcpy
+*/
+
+void	matcpy_test()
+{
+	int		src[4][4];
+	int		dst[4][4];
+
+	matset(src, 1);
+	matset(dst, 0);
+	ft_putendl("BEFORE");
+	ft_putendl("src:");
+	matprnt(src);
+	ft_putendl("dst:");
+	matprnt(dst);
+
+	matcpy(dst, src);
+
+	ft_putendl("AFTER");
+	ft_putendl("src:");
+	matprnt(src);
+	ft_putendl("dst:");
+	matprnt(dst);
+}
+
+/*
+**	test function to see if my image functions work
+*/
+
+void	img_test1(void *m, void *wn, t_list *map, int w, int h)
 {
 	t_img 	*img;
 	t_list	*proj;
@@ -83,14 +155,14 @@ void	test(void *m, void *wn, t_list *map, int w, int h)
 	printf("in test(), img->data = %p\n", img->data);
 	proj = ft_lstmap(map, ortho);
 	put_verts(img, proj, 0x00FF0000);
-	draw_lines(img, proj, 0x00FF0000);
+	//draw_lines(img, proj, 0x00FF0000);
 	mlx_put_image_to_window(m, wn, img->pntr, w, h);
 }
 
 int		main(int argc, char **argv)
 {
-	void	*mlx;
-	void	*window;
+	//void	*mlx;
+	//void	*window;
 	t_list	*map;
 	int		fd;
 
@@ -104,10 +176,11 @@ int		main(int argc, char **argv)
 	read_map(fd, &map);
 	if (!map)
 		return (0);
-	print_map_data(map);
-	mlx = mlx_init();
-	window = mlx_new_window(mlx, 1000, 1000, "FDF");
-	test(mlx, window, map, 500, 500);
-	mlx_loop(mlx);
+	matcpy_test();
+	//print_map_data(map);
+	//mlx = mlx_init();
+	//window = mlx_new_window(mlx, 1000, 1000, "FDF");
+	//img_test1(mlx, window, map, 500, 500);
+	//mlx_loop(mlx);
 	return (0);
 }
