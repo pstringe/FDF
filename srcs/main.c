@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 20:40:57 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/09 18:39:06 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/10 19:54:09 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ void 	matmult(int	dst[4][4], int mat[4][4], int by[4][4])
 			s = 0;
 			k = -1;
 			while (++k < 4)
-			{
-				s += s + mat[i][k] * by[k][j];
-			}
+				s += mat[i][k] * by[k][j];
 			dst[i][j] = s;
 		}
 	}
@@ -108,12 +106,31 @@ void	matprnt(int mat[4][4])
 		while (++j < 4)
 		{
 			ft_putchar('[');
-			ft_putnbr(mat[i][j]);
+			ft_putstr(ft_itoa(mat[i][j]));
 			ft_putstr("],\t");
 		}
 		ft_putchar('\n');
 	}
 	ft_putchar('\n');
+}
+
+/*
+**	a function to initialize an identity matrix
+*/
+
+void	matident(int mat[4][4])
+{
+	int		i;
+	int		k;
+
+	k = 0;
+	i = -1;
+	matset(mat, 0);
+	while (++i < 4)
+	{
+		mat[i][k] = 1;
+		k++;
+	}
 }
 
 /*
@@ -140,6 +157,41 @@ void	matcpy_test()
 	matprnt(src);
 	ft_putendl("dst:");
 	matprnt(dst);
+	ft_putendl("-------------");
+}
+
+/*
+**	test function for matmult
+*/
+
+void	matmult_test()
+{
+	int		mat[4][4];
+	int		by[4][4];
+	int		p[4][4];
+
+	matset(mat, 2);
+	matident(by);
+	matset(p, 0);
+	ft_putendl("BEFORE");
+	ft_putendl("mat:");
+	matprnt(mat);
+	ft_putendl("by:");
+	matprnt(by);
+	ft_putendl("p:");
+	matprnt(p);
+
+	matmult(p, mat, by);
+	
+	ft_putendl("AFTER");
+	ft_putendl("mat:");
+	matprnt(mat);
+	ft_putendl("by:");
+	matprnt(by);
+	ft_putchar('\n');
+	ft_putendl("p:");
+	matprnt(p);
+	ft_putendl("------------");
 }
 
 /*
@@ -177,6 +229,7 @@ int		main(int argc, char **argv)
 	if (!map)
 		return (0);
 	matcpy_test();
+	matmult_test();
 	//print_map_data(map);
 	//mlx = mlx_init();
 	//window = mlx_new_window(mlx, 1000, 1000, "FDF");
