@@ -12,7 +12,8 @@ SRC = main.c\
 	  read.c\
 	  vects.c\
 	  image.c\
-	  project.c
+	  project.c\
+	  tests.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 SRCS = $(addprefix $(SRCD), $(SRC))
 OBJS = $(notdir $(OBJ))
