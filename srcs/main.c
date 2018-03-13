@@ -6,23 +6,12 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 20:40:57 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/10 19:54:09 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/13 11:19:28 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fdf.h"
-
-/*
-**	multiplies a vector by a matrix
-*/
-
-void	multvect(t_3d *dst, int	mat[4][4], t_3d *src)
-{
-	dst->x = src->x * mat[0][0]	+ src->y * mat[1][0] + src->z * mat[2][0] + mat[3][0];
-	dst->y = src->x * mat[0][1] + src->y * mat[1][1] + src->z * mat[2][1] + mat[3][1];
-	dst->z = src->x * mat[0][2]	+ src->y * mat[1][2] + src->z * mat[2][2] + mat[3][2];
-}
 
 /*
 **	multiplies 2 4 by 4 matricies, stores result in a destination matrix
@@ -64,9 +53,7 @@ void	matcpy(int dst[4][4], int src[4][4])
 	{
 		j = -1;
 		while (++j < 4)
-		{
 			dst[i][j] = src[i][j];
-		}
 	}
 }
 
@@ -84,9 +71,7 @@ void	matset(int mat[4][4], int n)
 	{
 		j = -1;
 		while (++j < 4)
-		{
 			mat[i][j] = n;
-		}
 	}
 }
 
@@ -113,12 +98,11 @@ void	matprnt(int mat[4][4])
 	}
 	ft_putchar('\n');
 }
-
 /*
 **	a function to initialize an identity matrix
 */
 
-void	matident(int mat[4][4])
+void	identmat(int mat[4][4])
 {
 	int		i;
 	int		k;
@@ -131,6 +115,60 @@ void	matident(int mat[4][4])
 		mat[i][k] = 1;
 		k++;
 	}
+}
+
+/*
+**	initializes  a scale transformation matrix
+*/
+
+void	tranmat(int mat[4][4], int x, int y, int z)
+{
+	identmat(mat);
+	mat[3][0] = x;
+	mat[3][1] = y;
+	mat[3][2] = z;
+	mat[3][3] = 1;
+}
+
+/*
+**	applies a tansformation to a vector
+*/
+
+t_list	*transform(int mat[4][4], t_list *lst)
+{
+	t_list		*trans;
+	t_3d		*src;
+	t_3d		*dst;
+
+	src = (t_3d*)(lst->content);
+	dst = ft_memalloc(sizeof(t_3d));
+	dst->x = src->x * mat[0][0]	+ src->y * mat[1][0] + src->z * mat[2][0] + mat[3][0];
+	dst->y = src->x * mat[0][1] + src->y * mat[1][1] + src->z * mat[2][1] + mat[3][1];
+	dst->z = src->x * mat[0][2]	+ src->y * mat[1][2] + src->z * mat[2][2] + mat[3][2];
+	trans = ft_lstnew(dst, sizeof(t_3d));
+	return (trans);
+}
+
+/*
+**	translates a list of 3D vectors
+*/
+
+t_list *translate(t_list *src, int x, int y, int z)
+{
+	int		mat[4][4];
+	t_list	*tran;
+	t_list	*vect;
+	t_list	*tmp;
+	
+	tran = NULL;
+	tranmat(mat, x, y, z);
+	tmp = src;
+	while (tmp)
+	{
+		ft_lstadd_tail(&tran, (vect = transform(mat, tmp)));
+		tmp = tmp->next;
+	}
+	return (tran);
 }
 
 /*
@@ -171,7 +209,7 @@ void	matmult_test()
 	int		p[4][4];
 
 	matset(mat, 2);
-	matident(by);
+	identmat(by);
 	matset(p, 0);
 	ft_putendl("BEFORE");
 	ft_putendl("mat:");
@@ -195,6 +233,37 @@ void	matmult_test()
 }
 
 /*
+**	test function for matscale
+*/
+
+void 	matscale_test(void *m, int w, int h, t_list *map)
+{
+	void	*wn1;
+	void 	*wn2;
+	t_img 	*img1;
+	t_img	*img2;
+	t_list	*trans;
+	t_list	*proj1;
+	t_list 	*proj2;
+
+	wn1 = mlx_new_window(m, w, h, "ORIGINAL MAP");
+	wn2 = mlx_new_window(m, (w * 2), (h * 2), "TRANFORMED MAP");
+
+	img1 = new_img(m, w, h);
+	img2 = new_img(m, w * 2, h * 2);
+
+	trans = translate(map, 10, 10, -5);
+	proj1 = ft_lstmap(map, ortho);
+	proj2 = ft_lstmap(trans, ortho);
+
+	put_verts(img1, proj1, 0x00FF0000);
+	put_verts(img2, proj2, 0x00FF0000);
+
+	mlx_put_image_to_window(m, wn1, img1->pntr, 0, 0);
+	mlx_put_image_to_window(m, wn2, img2->pntr, 0, 0);
+}
+
+/*
 **	test function to see if my image functions work
 */
 
@@ -213,7 +282,7 @@ void	img_test1(void *m, void *wn, t_list *map, int w, int h)
 
 int		main(int argc, char **argv)
 {
-	//void	*mlx;
+	void	*mlx;
 	//void	*window;
 	t_list	*map;
 	int		fd;
@@ -228,12 +297,13 @@ int		main(int argc, char **argv)
 	read_map(fd, &map);
 	if (!map)
 		return (0);
-	matcpy_test();
-	matmult_test();
+	//matcpy_test();
+	//matmult_test();
 	//print_map_data(map);
-	//mlx = mlx_init();
+	mlx = mlx_init();
+	matscale_test(mlx, 500, 500, map);
 	//window = mlx_new_window(mlx, 1000, 1000, "FDF");
 	//img_test1(mlx, window, map, 500, 500);
-	//mlx_loop(mlx);
+	mlx_loop(mlx);
 	return (0);
 }
