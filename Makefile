@@ -52,7 +52,7 @@ $(NAME) : $(OBJS)
 	$(CC) $(OBJS) $(MLX_LNK) $(FT_LNK) -lm -o $(NAME)
 
 clean:
-	rm -rf $(OBJD)
+	rm -rf $(OBJS)
 	make -C $(FT) clean
 	make -C $(MLX) clean
 
