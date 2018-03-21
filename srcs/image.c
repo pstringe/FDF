@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 11:35:23 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/08 20:52:58 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/21 13:47:50 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,18 @@ t_img	*new_img(void *m, int w, int h)
 	img->l_size = l;
 	img->pixel = bits / 8;
 	return (img);
+}
+
+/*
+**	creates a new window, sizes it based on the size of and image
+**	and dumps the image to the window.
+*/
+
+void	*put_img(void *mlx, t_img *img, char *title)
+{
+	void	*wn;
+
+	wn = mlx_new_window(mlx, img->width, img->height, title);
+	mlx_put_image_to_window(mlx, wn, img->pntr, 0, 0);
+	return (wn);
 }

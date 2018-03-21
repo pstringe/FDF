@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 11:37:53 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/13 11:40:25 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/21 14:45:14 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,31 +77,30 @@ void	matmult_test()
 **	test function for matscale
 */
 
-void 	matscale_test(void *m, int w, int h, t_list *map)
+void 	mattran_test(void *m, int w, int h, t_list *map)
 {
 	void	*wn1;
-	void 	*wn2;
+	//void 	*wn2;
 	t_img 	*img1;
-	t_img	*img2;
-	t_list	*trans;
+	//t_img	*img2;
+	//t_list*trans;
 	t_list	*proj1;
-	t_list 	*proj2;
-
-	wn1 = mlx_new_window(m, w, h, "ORIGINAL MAP");
-	wn2 = mlx_new_window(m, (w * 2), (h * 2), "TRANFORMED MAP");
+	//t_list 	*proj2;
 
 	img1 = new_img(m, w, h);
-	img2 = new_img(m, w * 2, h * 2);
+	//img2 = new_img(m, w * 2, h * 2);
 
-	trans = translate(map, 10, 10, -5);
+	//trans = translate(map, 10, 10, -5);
 	proj1 = ft_lstmap(map, ortho);
-	proj2 = ft_lstmap(trans, ortho);
+	//proj2 = ft_lstmap(trans, ortho);
 
 	put_verts(img1, proj1, 0x00FF0000);
-	put_verts(img2, proj2, 0x00FF0000);
+	//put_verts(img2, proj2, 0x00FF0000);
 
-	mlx_put_image_to_window(m, wn1, img1->pntr, 0, 0);
-	mlx_put_image_to_window(m, wn2, img2->pntr, 0, 0);
+	wn1 = put_img(m, img1, "ORIGINAL");
+	//wn2 = put_img(m, img2, "TRANSFORMED");
+
+	printf("ORIGINAL:\t[%p]\n"/*TRANSFORMED:\t[%p]*/"\n", wn1/*, wn2*/);
 }
 
 /*
