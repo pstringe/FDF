@@ -13,6 +13,9 @@ SRC = main.c\
 	  vects.c\
 	  image.c\
 	  project.c\
+	  mat_ops.c\
+	  mat_init.c\
+	  trans.c\
 	  tests.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 SRCS = $(addprefix $(SRCD), $(SRC))

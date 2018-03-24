@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 11:37:53 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/21 14:45:14 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/22 12:11:45 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	matmult_test()
 **	test function for matscale
 */
 
-void 	mattran_test(void *m, int w, int h, t_list *map)
+void	*mattran_test(void *m, int w, int h, t_list *map)
 {
 	void	*wn1;
 	//void 	*wn2;
@@ -101,6 +101,7 @@ void 	mattran_test(void *m, int w, int h, t_list *map)
 	//wn2 = put_img(m, img2, "TRANSFORMED");
 
 	printf("ORIGINAL:\t[%p]\n"/*TRANSFORMED:\t[%p]*/"\n", wn1/*, wn2*/);
+	return (wn1);
 }
 
 /*

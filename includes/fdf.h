@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 08:39:07 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/13 12:09:05 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/22 12:11:41 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_list			*ortho(t_list *a);
 t_img			*new_img(void *m, int w, int h);
 void			set_pixel(t_img *img, int x, int y, int v);
 void			put_verts(t_img *img, t_list *vects, int v);
+void 			*put_img(void *mlx, t_img *img, char *title);
 
 /*
 **	transformations
@@ -113,6 +114,6 @@ t_list			*translate(t_list *src, int x, int y, int z);
 
 void			matcpy_test();
 void			matmult_test();
-void			matscale_test();
+void			*mattran_test();
 void			img_test1();
 #endif
