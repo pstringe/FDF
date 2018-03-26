@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 10:31:00 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/26 10:32:56 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/26 11:28:59 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	draw_line(t_img *img, t_2d *pnt1, t_2d *pnt2)
 	int		e;
 	int		df;
 	
+	if (!pnt1 || !pnt2 || !img)
+		return ;
 	da = (df = (ft_absval(DX) >= ft_absval(DY)) ? pnt1->x : pnt1->y);
 	pa = (df) ? pnt1->y : pnt1->x;
 	e = (df) ? DY - DX : DX - DY;

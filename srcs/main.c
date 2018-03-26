@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 20:40:57 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/26 10:33:52 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/26 12:24:27 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,27 @@ int		key_hook(int code, void *param)
 }
 */
 
+void	put_lines(t_img *img, t_list *vects)
+{
+	t_list	*tmp;
+	t_2d	*v;
+	t_3d	*u;
+	t_3d	*b;
+
+	tmp = vects;
+	while (tmp)
+	{
+		v = (t_2d*)(tmp->content);
+		u = v->o->up;
+		b = v->o->back;
+		if (b)
+			draw_line(img, (t_2d*)(ortho(ft_lstnew(b, sizeof(t_3d)))->content), v);
+		if (u)
+			draw_line(img, (t_2d*)(ortho(ft_lstnew(u, sizeof(t_3d)))->content), v);
+		tmp = tmp->next;
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	void	*mlx;
@@ -61,7 +82,7 @@ int		main(int argc, char **argv)
 	//matmult_test();
 	//print_map_data(map);
 	mlx = mlx_init();
-	wnd = draw_line_test(mlx);
+	//wnd = draw_line_test(mlx);
 	//wnd = mattran_test(mlx, 500, 500, map);
 	//mlx_mouse_hook(wnd, mouse_hook, &p);
 	//mlx_key_hook(wnd, key_hook, &p);

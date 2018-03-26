@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 08:39:07 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/26 10:30:39 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/26 12:22:40 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@
 
 typedef struct	s_3d
 {
-	int		x;
-	int		y;
-	int		z;
+	int			x;
+	int			y;
+	int			z;
+	struct s_3d	*back;
+	struct s_3d *up;
 }				t_3d;
 
 typedef struct	s_2d
@@ -69,7 +71,7 @@ void			matprnt(int mat[4][4]);
 */
 
 
-t_3d			*getvect(int x, int y, int z);
+t_3d			*getvect(int x, int y, int z, t_3d *back, t_3d *up);
 t_2d			*getvect2(int x, int y, t_3d *o);
 
 /*

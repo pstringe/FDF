@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 11:44:02 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/24 15:55:48 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/26 12:23:00 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** returns a 3d vector given coordinates
 */
 
-t_3d	*getvect(int x, int y, int z)
+t_3d	*getvect(int x, int y, int z, t_3d *back, t_3d *up)
 {
 	t_3d	*pnt;
 	
@@ -25,6 +25,8 @@ t_3d	*getvect(int x, int y, int z)
 	pnt->x = x;
 	pnt->y = y;
 	pnt->z = z;
+	pnt->back = back;
+	pnt->up = up;
 	return (pnt);
 }
 
