@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 08:39:07 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/22 12:11:41 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/24 15:59:45 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@
 ** points in space
 */
 
-typedef struct	s_2d
-{
-	int		x;
-	int		y;
-}				t_2d;
-
 typedef struct	s_3d
 {
 	int		x;
 	int		y;
 	int		z;
 }				t_3d;
+
+typedef struct	s_2d
+{
+	t_3d	*o;
+	int		x;
+	int		y;
+}				t_2d;
 	
 /*
 **	image
@@ -69,7 +70,7 @@ void			matprnt(int mat[4][4]);
 
 
 t_3d			*getvect(int x, int y, int z);
-t_2d			*getvect2(int x, int y);
+t_2d			*getvect2(int x, int y, t_3d *o);
 
 /*
 **	matrix initialisations

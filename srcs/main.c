@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 20:40:57 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/24 15:33:09 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/26 09:51:11 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,48 @@ int		key_hook(int code, void *param)
 **	the complexity, I may just use a macro for that later.
 */	
 
-void	draw_line(t_img *img, t_2d *pnt1, t_2d *pnt2, int dx, int dy)
+#define DX (pnt2->x - pnt1->x)
+#define	DY (pnt2->y - pnt1->y)
+
+void	draw_line(t_img *img, t_2d *pnt1, t_2d *pnt2)
 {
 	int		da;
 	int		pa;
 	int		e;
 	int		df;
 	
-	da = (df = (ft_absval(dx) >= ft_absval(dy)) ? pnt1->x : pnt1->y);
+	da = (df = (ft_absval(DX) >= ft_absval(DY)) ? pnt1->x : pnt1->y);
 	pa = (df) ? pnt1->y : pnt1->x;
-	e = (df) ? dy - dx : dx - dy;
+	e = (df) ? DY - DX : DX - DY;
 	while (da < (df) ? pnt2->x: pnt2->y)
 	{
 		set_pixel(img, ((df) ? da : pa), ((df) ? pa : da), 0x00FF0000);
 		if (e >= 0)
 		{
 			pa++;
-			e -= (df) ? dx : dy;
+			e -= (df) ? DX : DY;
 		}
 		da++;
-		e += (df) ? dy : dx;
+		e += (df) ? DX : DY;
 	}
+}
+void	*draw_line_test(void *mlx)
+{
+	void	*wn;
+	void	*img;
+	t_list 	*vects[3];
+
+	vects[0] = ft_lstnew(getvect2(10, 10, NULL), sizeof(t_2d));
+	vects[1] = ft_lstnew(getvect2(90, 90, NULL), sizeof(t_2d));
+	vects[2] = NULL;
+
+	vects[0]->next = vects[1];
+	vects[1]->next = vects[2];
+
+	img = new_img(mlx, 100, 100);
+	put_verts(img, vects[0], 0x00FF0000);
+	wn = put_img(mlx, img, "DRAW_LINE_TEST");
+	return (wn);
 }
 
 int		main(int argc, char **argv)
@@ -91,7 +112,8 @@ int		main(int argc, char **argv)
 	//matmult_test();
 	//print_map_data(map);
 	mlx = mlx_init();
-	wnd = mattran_test(mlx, 500, 500, map);
+	wnd = draw_line_test(mlx);
+	//wnd = mattran_test(mlx, 500, 500, map);
 	//mlx_mouse_hook(wnd, mouse_hook, &p);
 	//mlx_key_hook(wnd, key_hook, &p);
 	//window = mlx_new_window(mlx, 1000, 1000, "FDF");
