@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 20:40:57 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/26 09:51:11 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/26 10:13:44 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	draw_line(t_img *img, t_2d *pnt1, t_2d *pnt2)
 	da = (df = (ft_absval(DX) >= ft_absval(DY)) ? pnt1->x : pnt1->y);
 	pa = (df) ? pnt1->y : pnt1->x;
 	e = (df) ? DY - DX : DX - DY;
-	while (da < (df) ? pnt2->x: pnt2->y)
+	while (da < ((df) ? pnt2->x: pnt2->y))
 	{
 		set_pixel(img, ((df) ? da : pa), ((df) ? pa : da), 0x00FF0000);
 		if (e >= 0)
@@ -86,6 +86,7 @@ void	*draw_line_test(void *mlx)
 
 	img = new_img(mlx, 100, 100);
 	put_verts(img, vects[0], 0x00FF0000);
+	draw_line(img, (t_2d*)(vects[0]->content), (t_2d*)(vects[1]->content));
 	wn = put_img(mlx, img, "DRAW_LINE_TEST");
 	return (wn);
 }
