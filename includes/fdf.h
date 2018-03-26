@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 08:39:07 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/24 15:59:45 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/26 10:30:39 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,11 @@ void			put_verts(t_img *img, t_list *vects, int v);
 void 			*put_img(void *mlx, t_img *img, char *title);
 
 /*
+**	functions for drawing on images
+*/
+
+void			draw_line(t_img *img, t_2d *pnt1, t_2d *pnt2);
+/*
 **	transformations
 */
 
@@ -117,4 +122,6 @@ void			matcpy_test();
 void			matmult_test();
 void			*mattran_test();
 void			img_test1();
+void			*draw_line_test(void *mlx);
+
 #endif

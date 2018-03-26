@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 11:37:53 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/22 12:11:45 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/26 10:34:42 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,28 @@ void	img_test1(void *m, void *wn, t_list *map, int w, int h)
 	put_verts(img, proj, 0x00FF0000);
 	//draw_lines(img, proj, 0x00FF0000);
 	mlx_put_image_to_window(m, wn, img->pntr, w, h);
+}
+
+/*
+**	test function to draw lines
+*/
+
+void	*draw_line_test(void *mlx)
+{
+	void	*wn;
+	void	*img;
+	t_list 	*vects[3];
+
+	vects[0] = ft_lstnew(getvect2(10, 10, NULL), sizeof(t_2d));
+	vects[1] = ft_lstnew(getvect2(90, 90, NULL), sizeof(t_2d));
+	vects[2] = NULL;
+
+	vects[0]->next = vects[1];
+	vects[1]->next = vects[2];
+
+	img = new_img(mlx, 100, 100);
+	put_verts(img, vects[0], 0x00FF0000);
+	draw_line(img, (t_2d*)(vects[0]->content), (t_2d*)(vects[1]->content));
+	wn = put_img(mlx, img, "DRAW_LINE_TEST");
+	return (wn);
 }
