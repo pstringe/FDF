@@ -6,15 +6,15 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 11:37:53 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/26 10:34:42 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/31 14:31:07 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /*
+
 **	a test function for matcpy
-*/
 
 void	matcpy_test()
 {
@@ -38,11 +38,11 @@ void	matcpy_test()
 	matprnt(dst);
 	ft_putendl("-------------");
 }
-
+*/
 /*
 **	test function for matmult
 */
-
+/*
 void	matmult_test()
 {
 	int		mat[4][4];
@@ -72,10 +72,10 @@ void	matmult_test()
 	matprnt(p);
 	ft_putendl("------------");
 }
-
+*/
 /*
 **	test function for matscale
-*/
+
 
 void	*mattran_test(void *m, int w, int h, t_list *map)
 {
@@ -100,13 +100,14 @@ void	*mattran_test(void *m, int w, int h, t_list *map)
 	wn1 = put_img(m, img1, "ORIGINAL");
 	//wn2 = put_img(m, img2, "TRANSFORMED");
 
-	printf("ORIGINAL:\t[%p]\n"/*TRANSFORMED:\t[%p]*/"\n", wn1/*, wn2*/);
+	printf("ORIGINAL:\t[%p]\n"TRANSFORMED:\t[%p]"\n", wn1, wn2);
 	return (wn1);
 }
+*/
 
 /*
 **	test function to see if my image functions work
-*/
+
 
 void	img_test1(void *m, void *wn, t_list *map, int w, int h)
 {
@@ -120,10 +121,9 @@ void	img_test1(void *m, void *wn, t_list *map, int w, int h)
 	//draw_lines(img, proj, 0x00FF0000);
 	mlx_put_image_to_window(m, wn, img->pntr, w, h);
 }
-
+*/
 /*
 **	test function to draw lines
-*/
 
 void	*draw_line_test(void *mlx)
 {
@@ -144,3 +144,4 @@ void	*draw_line_test(void *mlx)
 	wn = put_img(mlx, img, "DRAW_LINE_TEST");
 	return (wn);
 }
+*/

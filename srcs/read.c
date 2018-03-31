@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 15:33:05 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/30 21:43:59 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/31 15:07:38 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_map	*read_map(int fd)
 	}
 	smap[i] = NULL;
 	map = (t_map*)ft_memalloc(sizeof(t_map));
-	map->vects = (t_3d***)ft_memalloc(sizeof(t_3d**) * (i + 1));
+	map->vects = (t_3d***)ft_memalloc(sizeof(t_3d**) * i + 1);
 	(map->vects)[i] = NULL;
 	i = -1;
 	while (smap[++i])

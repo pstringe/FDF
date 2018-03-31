@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 08:39:07 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/30 22:18:49 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/31 14:24:23 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_map
 	int				z_min;
 	int				z_max;
 	struct s_3d		***vects;
+	struct s_3d		***trans;
 	struct s_2d		***proj;	
 }				t_map;
 
@@ -72,8 +73,8 @@ typedef struct	s_img
 typedef struct	s_wnd
 {
 	void	*pntr;
-	void	*width;
-	void	*height;
+	int		width;
+	int		height;
 }				t_wnd;
 
 /*
@@ -83,7 +84,7 @@ typedef struct	s_wnd
 typedef struct	s_mlx
 {
 	void	*pntr;
-	t_wnd 	*wndw;
+	t_wnd 	*wnd;
 	t_img	*img;
 	t_map	*map;
 }				t_mlx;
@@ -92,7 +93,7 @@ typedef struct	s_mlx
 **	initialize all the stuff
 */
 
-t_mlx	*init(int fd);
+t_mlx			*init(int fd);
 
 /*
 ** read in map vectors
@@ -135,7 +136,8 @@ void			matcpy(int dst[4][4], int src[4][4]);
 **	projection functions
 */
 
-t_list			*ortho(t_list *a);
+t_2d			*ortho(t_3d *a);
+t_2d			***project(t_map *map, t_2d *(*f)(t_3d*));
 
 /*
 **	functions for dealing with images
@@ -143,8 +145,8 @@ t_list			*ortho(t_list *a);
 
 t_img			*new_img(void *m, int w, int h);
 void			set_pixel(t_img *img, int x, int y, int v);
-void			put_verts(t_img *img, t_list *vects, int v);
-void 			*put_img(void *mlx, t_img *img, char *title);
+void			put_verts(t_img *img, t_map *map, int v);
+t_wnd 			*put_img(void *mlx, t_img *img, char *title);
 
 /*
 **	functions for drawing on images

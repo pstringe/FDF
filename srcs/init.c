@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 22:15:27 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/30 22:16:43 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/31 14:28:13 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ t_mlx	*init(int fd)
 	mlx->pntr = mlx_init();
 	mlx->map = read_map(fd);
 	mlx->img = NULL;
-	mlx->wndw = NULL;
+	mlx->wnd = NULL;
 	return (mlx);
 }

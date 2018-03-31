@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 11:35:23 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/21 13:47:50 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/31 14:56:22 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,24 @@ void	set_pixel(t_img *img, int x, int y, int v)
 **	uses a list of 2d vects to create a monochromatic image
 */
 
-void	put_verts(t_img *img, t_list *vects, int v)
+void	put_verts(t_img *img, t_map *map, int v)
 {
-	t_list	*tmp;
-	t_2d	*tmpv;
+	t_2d	***vects;
+	int		i;
+	int		j;
+
+	vects = map->proj;
+	i = -1;
+	while (vects[++i])
+	{
+		j = -1;
+		while (vects[i][++j])
+		{
+			set_pixel(img, (vects[i][j])->x, (vects[i][j])->y, v);
+		}
+	}
+	/*
+	 t_2d	*tmpv;
 
 	tmp = vects;
 	while (tmp)
@@ -40,6 +54,7 @@ void	put_verts(t_img *img, t_list *vects, int v)
 		set_pixel(img, tmpv->x, tmpv->y, v);
 		tmp = tmp->next;
 	}
+	*/
 }
 
 /*
@@ -75,11 +90,14 @@ t_img	*new_img(void *m, int w, int h)
 **	and dumps the image to the window.
 */
 
-void	*put_img(void *mlx, t_img *img, char *title)
+t_wnd	*put_img(void *mlx, t_img *img, char *title)
 {
-	void	*wn;
+	t_wnd	*wn;
 
-	wn = mlx_new_window(mlx, img->width, img->height, title);
-	mlx_put_image_to_window(mlx, wn, img->pntr, 0, 0);
+	wn = (t_wnd*)ft_memalloc(sizeof(t_wnd));
+	wn->pntr = mlx_new_window(mlx, img->width, img->height, title);
+	wn->width = img->width + 20;
+	wn->height = img->height + 20;
+	mlx_put_image_to_window(mlx, wn->pntr, img->pntr, 10, 10);
 	return (wn);
 }
