@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 08:39:07 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/26 10:30:39 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/30 20:40:48 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdio.h>
 
 /*
-** points in space
+**	points in space
 */
 
 typedef struct	s_3d
@@ -35,7 +35,21 @@ typedef struct	s_2d
 	int		x;
 	int		y;
 }				t_2d;
-	
+
+/*
+**	stores map data
+*/
+
+typedef struct	s_map
+{
+	int				x_max;
+	int				y_max;
+	int				z_min;
+	int				z_max;
+	struct s_3d		***vects;
+	struct s_2d		***proj;	
+}				t_map;
+
 /*
 **	image
 */
@@ -49,6 +63,30 @@ typedef struct	s_img
 	int		l_size;
 	int		pixel;
 }				t_img;
+
+/*
+**	this stores window information, for now I only want one window associated with each mlx pntr, 
+**	but I may want more in the future
+*/
+
+typedef struct	s_wnd
+{
+	void	*pntr;
+	void	*width;
+	void	*height;
+}				t_wnd;
+
+/*
+**	mlx info for now I only want one window associated with a pntr at a time
+*/
+
+typedef struct	s_mlx
+{
+	void	*pntr;
+	t_wnd 	*wndw;
+	t_img	*img;
+	t_map	*map;
+}				t_mlx;
 
 /*
 ** read in map vectors
