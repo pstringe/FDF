@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 15:34:42 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/21 13:18:11 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/30 21:37:26 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,8 @@ void	matprnt(int mat[4][4])
 **	utility function to display the information assotiated with one 3D vector
 */
 
-void	print_point(t_list *pnt)
+void	print_point(t_3d *vect)
 {
-	t_3d	*vect;
-
-	vect = (t_3d*)(pnt->content);
 	ft_putendl(ft_itoa(vect->x));
 	ft_putendl(ft_itoa(vect->y));
 	ft_putendl(ft_itoa(vect->z));
@@ -56,14 +53,22 @@ void	print_point(t_list *pnt)
 **	utilitty function to display map data
 */
 
-void	print_map_data(t_list *map)
+void	print_map_data(t_map *map)
 {	
-	t_list *tmp;
+	int		i;
+	int		j;
+	t_3d	***vects;
 
-	tmp = map;
-	while (tmp)
+	ft_putendl(ft_itoa(map->x_max));
+	ft_putendl(ft_itoa(map->y_max));
+	vects = map->vects;
+	i = -1;
+	while (vects[++i])
 	{
-		print_point(tmp);
-		tmp = tmp->next;
+		j = -1;
+		while (vects[++j])
+		{
+			print_point(vects[i][j]);
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 08:39:07 by pstringe          #+#    #+#             */
-/*   Updated: 2018/03/30 20:40:48 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/03/30 22:18:49 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,23 @@ typedef struct	s_mlx
 }				t_mlx;
 
 /*
+**	initialize all the stuff
+*/
+
+t_mlx	*init(int fd);
+
+/*
 ** read in map vectors
 */
 
-void			read_map(int fd, t_list **map);
+t_map			*read_map(int fd);
 
 /*
 ** utility functions
 */
 
-void			print_point(t_list *pnt);
-void			print_map_data(t_list *map);
+void			print_point(t_3d *pnt);
+void			print_map_data(t_map *map);
 void			matprnt(int mat[4][4]);
 
 /*
